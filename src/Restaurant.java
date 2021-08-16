@@ -7,12 +7,12 @@ public class Restaurant {
     final String type;
 	final double rating;
 	private final String timing;
-	private final String review;
+	private String review;
 	final Menu menu;
-	Table[] tables= new Table[4];
+	Table[] tables;
 
 	
-	public Restaurant(String a, String[] b, String p, String e, double r, String c, String d, Menu m) {
+	public Restaurant(String a, String[] b, String p, String e, double r, String c, String d, Menu m, Table[] t) {
 		name = a;
 		address = b;
 		city = p;
@@ -21,16 +21,36 @@ public class Restaurant {
 		timing = c;
 		review = d;
 		menu = m;
+		tables = t;
 	}
-	
+
+	public Restaurant() {
+		name = null;
+		address = null;
+		city = null;
+		type = null;
+		rating = 0;
+		timing = null;
+		review = null;
+		menu = null;
+		tables = null;
+	}
+
 	public String[] getAddress() {
 		return this.address;
+	}
+	
+	public void updateReview(String string) {
+		this.review = string;
+	}
+	
+	public String getReview() {
+		return this.review;
 	}
 	
 	public String toString() {
 		if(this.name.equals("Not Found"))
 			return this.name;
-		return this.name + "\n" + this.rating + "\n" + this.type + "\n" ;/*+ this.timing + "\n" +this.address[0] + "\n" + this.address[1] + "\n" + this.address[2] + "\n" + this.address[3] + "\n" + this.address[4] + "\n" + this.address[5] + "\n" +this.address[6] + "\n" + this.address[7] + "\n" + this.address[8] + "\n" + this.address[9] + "\n" + this.address[10] + "\n" + this.address[11] + "\n" + this.address[12] + "\n" + this.review;*/
+		return this.name + "\n" + this.rating + "\n" + this.type + "\n" ;
 	}
-	
 }

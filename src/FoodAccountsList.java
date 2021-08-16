@@ -1,9 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 public class FoodAccountsList {
+
     FoodAccount[] list = new FoodAccount[1000];
     int count;
+
     public FoodAccountsList(){
         
         String filename = "accounts.txt";
@@ -23,10 +26,12 @@ public class FoodAccountsList {
             }
             this.count = i; 
     }
+
     public String getUserId(int i){
         return this.list[i].userId;
     }
+
     public String getPassword(int i){
         return this.list[i].password;
-    }   
+    }
 }

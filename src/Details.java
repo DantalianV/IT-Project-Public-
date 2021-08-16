@@ -9,13 +9,26 @@ public class Details {
 	String[] timing = new String[1002];
 	String[] review = new String[1002];
 	Menu[] menus = new Menu[1002];
-	
+	Table[][] tables = new Table[1002][4];
+
+	public Details() {
+		names = ReadFile.readStrings("names.txt");
+		address = ReadFile.readAdd("addresses.txt");
+		rating = ReadFile.readDouble("ratings.txt");
+		city = ReadFile.readStrings("cities.txt");
+		timing = ReadFile.readStrings("timing.txt");
+		review = ReadFile.readStrings("review.txt");
+		type = typeReturn();
+		menus = returnMenu();
+		tables = tableInitialization();
+	}
+
 	private String randomType() {
 		String[] typeString = {"Punjabi","Italian","Fastfood","South Indian"};
-		
+
 		return typeString[(int)(Math.random()*4)];
 	}
-	
+
 	private String[] typeReturn() {
 		String[] restype = new String[1002];
 		for(int i = 0; i<1002; i++) {
@@ -23,12 +36,12 @@ public class Details {
 		}
 		return restype;
 	}
-	
+
 	private Menu[] returnMenu() {
 		Menu[] resMenus = new Menu[1002];
 		MenuList menuList = new MenuList();
 		menuList.buildLibrary();
-		
+
 		for(int i = 0; i<1002; i++) {
 			if((this.type[i]).equals("Punjabi"))
 				resMenus[i] = menuList.menus[0];
@@ -39,21 +52,20 @@ public class Details {
 			else
 				resMenus[i] = menuList.menus[2];
 		}
-	
+
 		return resMenus;
 	}
-	
-	public Details() {
-		names = ReadFile.readStrings("names.txt");
-		address = ReadFile.readAdd("addresses.txt");
-		rating = ReadFile.readDouble("ratings.txt");
-		city = ReadFile.readStrings("cities.txt");
-		timing = ReadFile.readStrings("timing.txt");
-		review = ReadFile.readStrings("review.txt");
-		type = typeReturn();
-		menus = returnMenu();
+
+	private Table[][] tableInitialization() {
+		for(int i = 0; i<1002; i++) {
+			for(int j = 0; j<4; j++) {
+				this.tables[i][j] = new Table();
+			}
+		}
+
+		return this.tables;
 	}
-	
+
 	public static void main(String[] args) {
 		
 		Details details = new Details();
@@ -64,5 +76,4 @@ public class Details {
 		
 		
 	}
-
 }

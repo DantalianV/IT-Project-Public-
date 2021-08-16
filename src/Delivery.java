@@ -1,12 +1,7 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Delivery {
 
@@ -20,18 +15,19 @@ public class Delivery {
     public void addInCart(Restaurant restaurant) {
 
         user.cart[itemNumber] = "";
+        System.out.println();
         restaurant.menu.displayMenu();
-        System.out.println("Enter the number corresponding to the item you want to order");
+        System.out.println("\nEnter the number corresponding to the item you want to order\n");
         int input = StdIn.readInt();
         user.cart[itemNumber] = restaurant.menu.menu[input - 1];
         itemNumber++;
-        System.out.println(restaurant.menu.menu[input - 1] + " was added to your cart!");
-        System.out.println("Press 1 if you want to order more or 2 if you want to checkout");
+        System.out.println("\n" + restaurant.menu.menu[input - 1] + " was added to your cart!");
+        System.out.println("\nPress 1 if you want to order more or 2 if you want to checkout\n");
         input = StdIn.readInt();
         if (input == 1)
             addInCart(restaurant);
-        user.timeOrdered = new Date();
-        return;
+        Date date = new Date();
+        user.timeOrdered = date.toString();
     }
 
     public void start() {
@@ -39,40 +35,49 @@ public class Delivery {
         Restaurant restaurant;
         RestaurantList resList = new RestaurantList();
 
-        System.out.println("Press 1 if you want to search by city");
+        System.out.println("\nPress 1 if you want to search by city");
         System.out.println("Press 2 if you want to search by rating");
-        System.out.println("Press 3 if you want to search by name");
+        System.out.println("Press 3 if you want to search by type");
+        System.out.println("Press 4 if you want to search by name\n");
 
         int input = StdIn.readInt();
 
         if (input == 1) {
-            System.out.println("Enter the city you want to search in:");
+            System.out.println("\nEnter the city you want to search in:\n");
             String city = StdIn.readString();
             Restaurant[] newList = resList.searchByLocation(city);
             RestaurantList.printRes(newList);
-            System.out.println("Press the number corresponding to the restaurant to select it");
+            System.out.println("Press the number corresponding to the restaurant to select it\n");
             input = StdIn.readInt();
             restaurant = newList[input];
         }
 
         else if (input == 2) {
-            System.out.println("Enter the rating you want to search by (number from 0 - 5)");
+            System.out.println("\nEnter the rating you want to search by (number from 0 - 5)\n");
             double rating = StdIn.readDouble();
             Restaurant[] newList = resList.searchByRating(rating);
             RestaurantList.printRes(newList);
-            System.out.println("Press the number corresponding to the restaurant to select it");
+            System.out.println("Press the number corresponding to the restaurant to select it\n");
             input = StdIn.readInt();
             restaurant = newList[input];
         }
 
         else if (input == 3) {
-            System.out.println("Enter the name of the restaurant");
+            Restaurant[] newList = resList.searchByType();
+            RestaurantList.printRes(newList);
+            System.out.println("Press the number corresponding to the restaurant to select it\n");
+            input = StdIn.readInt();
+            restaurant = newList[input];
+        }
+
+        else if (input == 4) {
+            System.out.println("\nEnter the name of the restaurant\n");
             String name = StdIn.readString();
             restaurant = resList.searchByName(name);
         }
 
         else {
-            System.out.println("invalid input");
+            System.out.println("\nInvalid input");
             return;
         }
 
@@ -81,18 +86,21 @@ public class Delivery {
         File f = new File("cart.txt");
         try {
             FileWriter fw = new FileWriter(f,true);
-            fw.write(user.accNumber);
+            String str = "";
+
+            str += user.accNumber + ";" + user.timeOrdered;
             for (int i = 0; user.cart[i] != null; i++)
             {
-                fw.write(":" + user.cart[i]);
+                str += ";" + user.cart[i];
             }
+            fw.write(str + "\n");
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Your order will be delivered in in 45 minutes, you can log in again to check how much longer the delivery will take");
-        System.out.println("Thank you");
+        System.out.println("\nYour order will be delivered in 45 minutes, you can log in again to check how much longer the delivery will take\n");
+        System.out.println("Thank you!");
     }
 
     public void checkDelivery() {
@@ -101,13 +109,11 @@ public class Delivery {
             return;
         }
 
-        System.out.println("\nYour Order is:");
+        System.out.println("\nThe items ordered are:");
         for (int i = 0; user.cart[i] != null; i++) {
             System.out.println(user.cart[i]);
         }
-        System.out.println();
-        Date now = new Date();
-        int diff = now.compareTo(user.timeOrdered);
-        System.out.println("It will be delivered in " + diff + " minutes");
+        System.out.println("\nThe order was placed at: " + user.timeOrdered);
+        System.out.println("\nOrders usually take 45 minutes to be delivered");
     }
 }
