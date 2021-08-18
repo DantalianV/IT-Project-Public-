@@ -11,7 +11,7 @@ public class Reservation {
 	static RestaurantList restDetails = new RestaurantList();
 
 	public Reservation() {
-		File file = new File("reservationrecords.txt");
+		File file = new File("ReservationRecords.txt");
     	Scanner myReader;
     	try {
 			myReader = new Scanner(file);
@@ -47,7 +47,7 @@ public class Reservation {
 	
 	public void reserve(Time st,Time et,Restaurant chosenRestaurant,FoodAccount use) {
 		
-		String finame = "reservationrecords.txt";
+		String finame = "ReservationRecords.txt";
 		boolean ifSuccessful =false;
 
 		for(int i = 0;i<4;i++)
@@ -119,14 +119,20 @@ public class Reservation {
 		System.out.println("\n1] Search restaurant \n2] Search by location");
 		System.out.println();
 		choice = StdIn.readInt();
-		if(choice==1) {
+
+		while (choice < 1 || choice > 2) {
+			System.out.println("\nEnter a valid number!\n");
+			choice = StdIn.readInt();
+		}
+
+		if (choice==1) {
 			String resname,searchResult;
 			System.out.println("\nEnter restaurant name\n");
 			resname=StdIn.readString();
 			searchResult= restDetails.byName(resname);
 			System.out.println(searchResult);
 
-			if(searchResult.equals("\nNot Found")) {
+			if(searchResult.equalsIgnoreCase("\nNot Found")) {
 				start(user);
 			}
 
@@ -152,78 +158,83 @@ public class Reservation {
 			endtime = new Time(hour,min);
 			
 			reserve(starttime,endtime,chosen,user);
-		}
-		
-		if(choice==2) {
+		} else {
 			System.out.println();
-			System.out.println("1] Search in your city \n2] Enter city manually\n");
-			choice= StdIn.readInt();
+			RestaurantList resList = new RestaurantList();
+			System.out.println("\n1] Chennai\n2] Bangalore\n3] Hyderabad\n4] Kolkata\n5] Delhi");
+			System.out.println("6] Pune\n7] Coimbatore\n8] Vadodara\n9] Ahmedabad\n10] Jaipur\n");
+			int input = StdIn.readInt();
+			System.out.println();
 
-			if(choice==1) {
-				Restaurant[] restInCity = restDetails.searchByLocation(user.city);
-				RestaurantList.printRes(restInCity);
-				System.out.println("Choose restaurant\n");
-				choice = StdIn.readInt();
-				chosen  = restInCity[choice-1];
-				Time starttime,endtime;
-				System.out.println("\nEnter start time and end time for your reservation (HH:MM)\n");
-				String inp1,inp2;
-				String[] temp;
-				int hour,min;
-				inp1 = StdIn.readString();
-				temp = inp1.split(":");
-				hour = Integer.parseInt(temp[0]);
-				min = Integer.parseInt(temp[1]);
-				starttime = new Time(hour,min);
-				
-				inp2 = StdIn.readString();
-				temp = inp2.split(":");
-				hour = Integer.parseInt(temp[0]);
-				min = Integer.parseInt(temp[1]);
-				endtime = new Time(hour,min);
-				
-				reserve(starttime,endtime,chosen,user);
-			}
-			else if(choice==2)
-			{
-				String city;
-				System.out.println();
-				city=StdIn.readString();
-				Restaurant[] restInCity = restDetails.searchByLocation(city);
-				RestaurantList.printRes(restInCity);
-				System.out.println("Choose restaurant\n");
-				choice = StdIn.readInt();
-				chosen  = restInCity[choice-1];
-				Time starttime,endtime;
-				System.out.println("\nEnter start time and end time for your reservation (HH:MM)\n");
-				String inp1,inp2;
-				String[] temp;
-				int hour,min;
-				inp1 = StdIn.readString();
-				temp = inp1.split(":");
-				hour = Integer.parseInt(temp[0]);
-				min = Integer.parseInt(temp[1]);
-				starttime = new Time(hour,min);
-				
-				inp2 = StdIn.readString();
-				temp = inp2.split(":");
-				hour = Integer.parseInt(temp[0]);
-				min = Integer.parseInt(temp[1]);
-				endtime = new Time(hour,min);
-				
-				reserve(starttime,endtime,chosen,user);
+			while (input > 10 || input < 1) {
+				System.out.println("\nEnter a valid number!\n");
+				input = StdIn.readInt();
 			}
 
-			else {
-				start(user);
+			Restaurant[] newList;
+
+			if (input == 1) {
+				String city = "Chennai";
+				newList = resList.searchByLocation(city);
+			} else if (input == 2) {
+				String city = "Bangalore";
+				newList = resList.searchByLocation(city);
+			} else if (input == 3) {
+				String city = "Hyderabad";
+				newList = resList.searchByLocation(city);
+			} else if (input == 4) {
+				String city = "Kolkata";
+				newList = resList.searchByLocation(city);
+			} else if (input == 5) {
+				String city = "Delhi";
+				newList = resList.searchByLocation(city);
+			} else if (input == 6) {
+				String city = "Pune";
+				newList = resList.searchByLocation(city);
+			} else if (input == 7) {
+				String city = "Coimbatore";
+				newList = resList.searchByLocation(city);
+			} else if (input == 8) {
+				String city = "Vadodara";
+				newList = resList.searchByLocation(city);
+			} else if (input == 9) {
+				String city = "Ahmedabad";
+				newList = resList.searchByLocation(city);
+			} else {
+				String city = "Jaipur";
+				newList = resList.searchByLocation(city);
 			}
+
+			RestaurantList.printRes(newList);
+
+			RestaurantList.printRes(newList);
+			System.out.println("Choose restaurant\n");
+			choice = StdIn.readInt();
+			chosen  = newList[choice-1];
+			Time starttime,endtime;
+			System.out.println("\nEnter start time and end time for your reservation (HH:MM)\n");
+			String inp1,inp2;
+			String[] temp;
+			int hour,min;
+			inp1 = StdIn.readString();
+			temp = inp1.split(":");
+			hour = Integer.parseInt(temp[0]);
+			min = Integer.parseInt(temp[1]);
+			starttime = new Time(hour,min);
+
+			inp2 = StdIn.readString();
+			temp = inp2.split(":");
+			hour = Integer.parseInt(temp[0]);
+			min = Integer.parseInt(temp[1]);
+			endtime = new Time(hour,min);
+
+			reserve(starttime,endtime,chosen,user);
 		}
 	}
 	
-  public static void checkReservation(FoodAccount user)
-	{
+  public static void checkReservation(FoodAccount user) {
 		ArrayList<String> prevres = new ArrayList<>();
- 		File file = new File("reservationrecords.txt");
+ 		File file = new File("ReservationRecords.txt");
     	Scanner myReader;
     	try {
 			myReader = new Scanner(file);
@@ -235,19 +246,17 @@ public class Reservation {
 				if (sarr.length != 6)
 					continue;
 				
-				if(sarr[5].equals(user.userId))
-				{
+				if(sarr[5].equals(user.userId)) {
 					prevres.add(data);
 				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
     	if(prevres.size()==0) {
     		System.out.println("No reservations have been made yet!!");
-    	}
-    	else
-    	{
+    	} else {
     		System.out.println("Reservations:");
     		for (int i=0;i<prevres.size();i++)
     		{
@@ -258,6 +267,4 @@ public class Reservation {
     	}
 		
 	}
-	
-
 }

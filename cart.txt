@@ -1,7 +1,0 @@
-1;Sun Aug 15 04:46:14 IST 2021;2. Masala Dosa;5. Cheese Dosa
-2;Mon Aug 16 21:07:28 IST 2021;24. Chow mein
-1;Tue Aug 17 06:30:04 IST 2021;23. Pongal;3. Rava Dosa
-1;Tue Aug 17 06:36:43 IST 2021;24. Shahi Biryani;3. Rava Dosa
-1;Wed Aug 18 05:49:51 IST 2021;14. Chicken Taco;15. Hot Dog
-0;Wed Aug 18 06:41:00 IST 2021
-0;Wed Aug 18 06:41:51 IST 2021;12. Veg Taco;14. Chicken Taco

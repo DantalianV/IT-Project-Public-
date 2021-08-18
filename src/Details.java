@@ -23,15 +23,15 @@ public class Details {
 	}
 	
 	private String[] typeReturn() {
-		String[] restype = new String[1002];
-		String[] typeString = {"Punjabi","Italian","Fastfood","South Indian"};
+		String[] restaurantType = new String[1002];
+		String[] typeString = {"Punjabi","Italian","Fast Food","South Indian"};
 		
 		Random random = new Random(0);
 		
 		for(int i = 0; i<1002; i++) {
-			restype[i] = typeString[random.nextInt(4)];
+			restaurantType[i] = typeString[random.nextInt(4)];
 		}
-		return restype;
+		return restaurantType;
 	}
 	
 	private Menu[] returnMenu() {
@@ -51,14 +51,5 @@ public class Details {
 		}
 	
 		return resMenus;
-	}
-	
-	public static void main(String[] args) {
-		
-		Details details = new Details();
-		
-		for(int i = 0; i<10; i++) {
-			StdOut.println(details.typeReturn()[i]);
-		}
 	}
 }

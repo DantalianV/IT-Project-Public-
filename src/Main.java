@@ -7,7 +7,7 @@ public class Main {
         System.out.println("\n\n\t\t\t\t\tHi!\n\n");
 
         FoodAccount user = new FoodAccount();
-        //user = user.start();
+        user = user.start();
         Scanner scan = new Scanner(System.in);
 
         System.out.println("\n\nWelcome " + user.userId + ", what can we do for you");
@@ -146,8 +146,8 @@ public class Main {
             reservation.start(user);
         } else if(input == 4) {
             delivery.checkDelivery();
-        } 
-        else if(input==5){
+        } else {
+            System.out.println();
         	Reservation.checkReservation(user);
         }
     }

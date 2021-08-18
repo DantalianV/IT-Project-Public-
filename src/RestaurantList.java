@@ -107,20 +107,4 @@ public class RestaurantList extends Details{
 			i++;
 		}
 	}
-<<<<<<< HEAD
-	
-	public static void main(String[] args) {
-		RestaurantList res = new RestaurantList();
-		//Restaurant[] restaurants = res.searchByType();
-		//printRes(restaurants);
-		//res.searchByName("The Dapper Palace").menu.displayMenu();
-		//StdOut.println(res.searchByName("Blabla"));
-		//StdOut.println(res.byRating(3)[0]);
-		//printRes(res.byLocaion(123456));
-		//String s = res.byName("Souls");
-		//System.out.println(s);
-	}
-
-=======
->>>>>>> 7550ed6823024b05468008376c056917fd58453c
 }

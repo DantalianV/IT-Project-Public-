@@ -1,4 +1,3 @@
-
 public class Time {
 	
 	private final int hour;
