@@ -207,7 +207,6 @@ public class Reservation {
 
 			RestaurantList.printRes(newList);
 
-			RestaurantList.printRes(newList);
 			System.out.println("Choose restaurant\n");
 			choice = StdIn.readInt();
 			chosen  = newList[choice-1];
