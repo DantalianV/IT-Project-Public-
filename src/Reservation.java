@@ -11,7 +11,7 @@ public class Reservation {
 	static RestaurantList restDetails = new RestaurantList();
 
 	public Reservation() {
-		File file = new File("ReservationRecords.txt");
+		File file = new File("reservationrecords.txt");
     	Scanner myReader;
     	try {
 			myReader = new Scanner(file);
@@ -47,7 +47,7 @@ public class Reservation {
 	
 	public void reserve(Time st,Time et,Restaurant chosenRestaurant,FoodAccount use) {
 		
-		String finame = "ReservationRecords.txt";
+		String finame = "reservationrecords.txt";
 		boolean ifSuccessful =false;
 
 		for(int i = 0;i<4;i++)
@@ -234,7 +234,7 @@ public class Reservation {
 	
   public static void checkReservation(FoodAccount user) {
 		ArrayList<String> prevres = new ArrayList<>();
- 		File file = new File("ReservationRecords.txt");
+ 		File file = new File("reservationrecords.txt");
     	Scanner myReader;
     	try {
 			myReader = new Scanner(file);
